@@ -1,0 +1,33 @@
+.text-to-speech {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: inline-flex;
+    flex-direction: column;
+    padding: 10px;
+    max-width: 700px;
+    margin: auto;
+}
+
+.title {
+    text-align: left;
+    font-size: larger;
+    margin: auto 18px 40px;
+}
+
+.list-of-recorded-words {
+    text-align: left;
+}
+
+.continue-button {
+    align-self: end;
+    margin: auto 18px 20px auto;
+    border-radius: 15px;
+    background-color: #269BFB;
+    color: white;
+    border: none;
+    width: 100px;
+    height: 40px;
+    font-size: medium;
+}
