@@ -5,7 +5,6 @@ import VoiceSelection from "./components/VoiceSelection";
 import './TextToSpeech.css';
 
 function TextToSpeech() {
-
     const [id, setId] = useState(1);
     const [title, setTitle] = useState('Text 1');
     const [text, setText] = useState('');
@@ -121,41 +120,40 @@ function TextToSpeech() {
             setIsVisible(true);
         }
     }
+
     const uploadToDB = async (json) => {
         fetch('http://localhost:3000/get-session-data', {
-                method: 'GET',
-                body: null
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    const arExperienceId = data.ar_experience_id;
+            method: 'GET',
+            body: null
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const arExperienceId = data.ar_experience_id;
 
-                    if (arExperienceId) 
-                    {
-                        fetch('http://localhost:3000/arapp/wordtimings/' + arExperienceId, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                'word_timings': json
+                if (arExperienceId) {
+                    fetch('http://localhost:3000/arapp/wordtimings/' + arExperienceId, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            'word_timings': json
                         }),
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert(`Thank you for submitting your data Your AR Experience ID: ${arExperienceId}`);
                         })
-                            .then(response => response.json())
-                            .then(data => {
-                                alert(`Thank you for submitting your data Your AR Experience ID: ${arExperienceId}`);
-                            })
-                            .catch((error) => {
-                                alert(`An error occurred while sending the data to the server. Please try again later.`);
-                            });
-                    }
-                    else
-                    {
-                        alert(`An error occurred while fetching the AR Experience ID. Please try again later.`);
-                    }
-                })
-                .catch((error) => console.error('Error fetching session data:', error));
-            }
+                        .catch((error) => {
+                            alert(`An error occurred while sending the data to the server. Please try again later.`);
+                        });
+                }
+                else {
+                    alert(`An error occurred while fetching the AR Experience ID. Please try again later.`);
+                }
+            })
+            .catch((error) => console.error('Error fetching session data:', error));
+    }
 
     return (
         <div className="text-to-speech">
