@@ -122,7 +122,8 @@ function TextToSpeech() {
     }
 
     const uploadToDB = async (json) => {
-        fetch('http://localhost:3000/get-session-data', {
+        console.log(json);
+        /*fetch('http://localhost:3000/get-session-data', {
             method: 'GET',
             body: null
         })
@@ -152,7 +153,7 @@ function TextToSpeech() {
                     alert(`An error occurred while fetching the AR Experience ID. Please try again later.`);
                 }
             })
-            .catch((error) => console.error('Error fetching session data:', error));
+            .catch((error) => console.error('Error fetching session data:', error));*/
     }
 
     return (
